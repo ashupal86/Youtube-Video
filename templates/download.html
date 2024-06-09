@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<form action="{{ url_for('download')}}" method="get">
+    <h1>{{data.title}}</h1>
+    <input type="text" name="url" value="{{url}}" style="width: 30%;">
+    <br>
+<label for="type">Select download type</label>
+    <input type="radio" id="video" name="type" value="video">
+    <label for="video">Video</label><br>
+    <input type="radio" id="audio" name="type" value="audio">
+    <label for="audio">Audio</label>
+<br>
+    <select name="video" id="video">
+        
+        {% for i in data.video %}
+            <option value="{{i.itag}}">{{i.resolution}}</option>
+        {% endfor %}
+    </select>
+    <select name="audio" id="audio">
+        {% for i in data.audio %}
+            <option value="{{i.itag}}">{{i.abr}}</option>
+        {% endfor %}
+    </select>
+<br>
+    <button type="submit">Download</button>
+    
+</form>
+
+
+{% endblock %}
